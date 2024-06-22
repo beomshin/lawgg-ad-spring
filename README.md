@@ -15,7 +15,7 @@
 - 해당 서비스 실행 (명령어 : systemctl restart lawgg-admin.service ) - 실행 스크립트 사전 작성
 - 로그 수행 확인 (위치 : /opt/lawgg-admin/logs, 파일명: lawgg-admin.log)
 - 주의사항: jar 교체시 백업 jar로 이전 jar 파일명 수정변경 (ex 파일명.20231102.jar)
-
+ 
 ## 기타
 
 #### 시스템 서비스 등록 스크립트 경로 (/etc/systemd/system/lawgg-admin.service)
