@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.was</groupId>
-    <artifactId>lawgg-admin</artifactId>
+    <artifactId>lawgg-admin-spring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>lawgg-admin</name>
