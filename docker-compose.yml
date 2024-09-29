@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  lawgg-ad-spring:
+  lawgg-admin-spring:
     image: ${DOCKER_IMAGE_NAME}
     container_name: ${DOCKER_CONTAINER_NAME}
     ports:

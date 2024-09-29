@@ -1,37 +1,13 @@
 server:
   port: 18001
-  shutdown: graceful
-  servlet:
-    context-path: /lawgg-ad-spring
-
-#LOG
-logging:
-  level:
-    root: info
-    jdbc.sqlonly: debug # SQL문만을 로그로 남기며, PreparedStatement일 경우 관련된 argument 값으로 대체된 SQL문이 보여진다.
-    jdbc.audit: debug # ResultSet을 제외한 모든 JDBC 호출 정보를 로그로 남긴다.
-    jdbc.resultset: debug # ResultSet을 포함한 모든 JDBC 호출 정보를 로그로 남긴다.
-    jdbc.connection: debug #DB 연결, 연결 해제와 관련된 로그를 보여준다
-    http.logging: debug
-    org.springframework.test: warn
-    com.amazonaws.util.EC2MetadataUtils: error
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] [%logger{0}:%line] [%X{request_id:-startup}] - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] [%logger{0}:%line] [%X{request_id:-startup}] - %msg%n"
-  logback:
-    rolling policy:
-      max-history: 365
-      max-file-size: 100MB
 
 spring:
   application:
-    name: lawgg-ad-spring
+    name: lawgg-admin
+  config:
+    import: optional:configserver:http://localhost:8888/ # spring cloud config 정보 조회 (서버 종료 option 처리)
   profiles:
     active: local
-    include:
-      - core
-      - gateway
-      - dao
     group:
       local:
         - console-logging # 콘솔 로깅만 사용
@@ -41,39 +17,15 @@ spring:
       prod:
         - console-logging
         - file-logging # 파일 로깅 사용
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${spring.datasource.url}
-    username: ${spring.datasource.username}
-    password: ${spring.datasource.password}
   jpa:
     generate-ddl: false
     hibernate:
-      ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     open-in-view: false
     show-sql: true
-  thymeleaf:
-    prefix: classpath:/static/
-    suffix: .html
-  web:
-    resources:
-      static-locations: classpath:/static/
   servlet:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
-
-aws:
-  s3:
-    region: ENC(EIB2g/U4jVzHosi9QUosPlU+tFP6H/lcluc/kMGFXPPTM+XFr9ap+XZ2X80R/cDD)
-    access-key: ENC(Q8A57jwYD1bYbHjlCk4vEPYL46/dDiys1YwLa1y6mjMCNOhcKFOcFkJ6w8YsT+zx4GacUhpJXcRuFBgObw4SyA==)
-    secret-key: ENC(ICpaLWfg2Snb4PNQ31gIUMAdT8zlSgOKnT5gJ0jXnCUPPIpJfXex2wOBQw/cN/C/BpPBrx8JLMgNoWkULQIaENyfnyzAXSZrgIOyqPBip4E=)
-    buket: ENC(sfiYuacgnGosgyqbK+t1It57iGZ0KPdPyGP32qjHxIhQ2uegFzP4Qbelz7SF9ZCg)
-    host: ENC(BVVl7wcbGFzwYtfrpqD0ZY2C1RLFJD1V1toKZqd9mYcahNy4PL0n4hrXkwVP9j4D04l2bEOyqQBeSRxGBZAlRCS7gk5BPf2DaodI5sFlWAq3FtA/FhvcayQ20l+bAott)
-
-token:
-  access-expired-time: 3600
-  refresh-expired-time: 604800
