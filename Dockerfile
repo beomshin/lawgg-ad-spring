@@ -2,7 +2,7 @@ FROM openjdk:8-alpine
 
 WORKDIR /
 
-ARG JAR_FILE_PATH=/target/lawgg-admin-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE_PATH=/target/lawgg-admin-spring-0.0.1-SNAPSHOT.jar
 
 ENV ACTIVE_PROFILE="local"
 
